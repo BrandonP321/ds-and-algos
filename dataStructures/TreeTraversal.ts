@@ -60,6 +60,26 @@ class TraversalTree<T> extends BinarySearchTree<T> {
 
         return visited;
     }
+
+    public DFSInOrder() {
+        const visited: TreeNode<T>[] = [];
+
+        const traverseTree = (node: TreeNode<T> | null) => {
+            if (!node) {
+                return null;
+            }
+            
+            node.left && traverseTree(node.left);
+
+            visited.push(node);
+            
+            node.right && traverseTree(node.right);
+        }
+
+        traverseTree(this.root);
+
+        return visited;
+    }
 }
 
 const myTravTree = new TraversalTree();
@@ -72,6 +92,6 @@ myTravTree.insert(15);
 myTravTree.insert(20);
 
 console.log(myTravTree.BFS(8));
-console.log(myTravTree.DFSPreorder());
+console.log(myTravTree.DFSInOrder());
 
 console.log(myTravTree);
